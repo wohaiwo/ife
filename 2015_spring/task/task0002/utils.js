@@ -286,3 +286,7 @@ function isMobilePhone(phone) {
 }
 
 /*******************任务3 DOM**********************************/
+
+function dom() {
+	
+}
