@@ -287,6 +287,150 @@ function isMobilePhone(phone) {
 
 /*******************任务3 DOM**********************************/
 
-function dom() {
-	ddd;
+//判断元素是否包含某个className元素
+function hasClass(element, className) {
+	var classNames = element.className;
+	if(!className) {
+		return false;
+	}
+	classNames = classNames.split(/\s+/);
+	for(var i = 0, len = classNames.length; i < len; i++) {
+		if(classNames[i] == className) {
+			return true;
+		}
+	}
+	return false;
 }
+
+// 为element增加一个样式名为newClassName的新样式
+function addClass(element, newClassName) {
+	if(!hasClass(element, newClassName)) {
+		return false;
+	}
+	element.className = element.className ? [element.className, newClassName].join(" ") : newClassName;
+}
+
+// 移出element中的样式oldClassName
+function removeClass(element, oldClassName) {
+	if(!hasClass(element, oldClassName) {
+		return false;
+	}
+	classNames = element.className.split(/\s+/);
+	for(var i =0, len = classNames.length; i < len; i++) {
+		if(classNames[i] == oldClassName) {
+			classNames.splice(i, 1);
+			break;
+		}
+	}
+	element.className = classNames.join(" ");
+}
+
+// 判断siblingNode和element是否为同一个父元素下的同一级的元素，返回bool值
+function isSiblingNode(element, siblingNode) {
+	for(var node = element.parentNode.firstChild; node; node = node.nextSibling) {
+		if(node === siblingNode) {
+			return true;
+		}
+	}
+	return false;
+}
+// 方法二 通过判断是否是用一个父元素来判断
+function isSiblingNode1(element, siblingNode) {
+	return element.parentNode === siblingNode.parentNode;
+}
+// 获取element相对于浏览器窗口的位置，返回一个对象{x, y}
+function getPosition(element) {
+	return element.getBoundingClientRect();
+}
+
+// 实现类似querySelector的函数功能
+function $(selector) {
+	// 未完 待续
+}
+
+/*************任务4 事件************/
+
+// 给一个element绑定一个针对event事件的响应，响应函数为listener
+var $ = {
+	// 获取事件对象
+	getEvent: function(event) {
+		return event ? event : window.event;
+	},
+	// 获取目标对象
+	getTarget: function(event) {
+		return event.target || event event.srcElement;
+	}
+	// 取消事件默认行为
+	preventDefault: function(event) {
+		if(event.preventDefault) {
+			event.preventDefault();
+		} else {
+			event.returnValue = false;
+		}
+	},
+	addEvent: function(element, event, listener) {
+		if(element.addEventListenenr) {
+		element.addEvent(event, listener, false);
+		} else if (element.attachEvent) {
+			element.addachEvent("on" + event, listener);
+		} else {
+			element["on" + event] = listener;
+		}
+	},
+	removeEvent: function(element, event, listener) {
+		if(element.removeEventListener) {
+		element.removeEventListener(event, listener, false);
+		} else if (element.detachEvent) {
+			element.detachEvent("on" + event, listener);
+		} else {
+			element["on" + event] = null;
+		}
+	},
+	click: function(element, listener) {
+		addEvent(element, "click", listener);
+	},
+	enter: function(element, listener) {
+		addEvent(element, "keyup", function(event) {
+			if(event.keyCode === 13) {
+				listener();
+			}
+		});
+	},
+	// 获取鼠标按钮事件 判断按下了鼠标的哪个键
+	getButton: function(event) {
+		if(document.implementation.hasFeature("MouseEvents", "2.0")) {
+			return event.button;
+		} else {
+			switch(event.button) {
+				case 0:
+				case 1:
+				case 3:
+				case 5:
+				case 7:
+					return 0;
+				case 2:
+				case 6:
+					return 2;
+				case 4:
+					return 1;
+				}
+		}
+	},
+	getWheelDelta: function(event) {
+		if(event.wheelDelta) {
+			return event.wheelDelta;
+		} else {
+			return -event.detail * 40;
+		}
+	}
+	
+};
+
+/**************  任务5 BOM  *******************/
+
+
+/**************  任务6 Ajax  *******************/
+
+
+
+

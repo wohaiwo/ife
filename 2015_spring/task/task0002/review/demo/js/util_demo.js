@@ -715,6 +715,7 @@ function addClass(element, newClassName) {
         }
     }
 }
+
 // 移除dom中的样式oldClassName
 function removeClass(element, oldClassName) {
     var result;

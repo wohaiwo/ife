@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>焦点图轮播效果</title>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+body {
+	padding: 20px;
+}
+#container {
+	height: 300px;
+	width: 500px;
+	overflow: hidden;
+	position: relative;
+	margin: 0 auto;
+	border: 2px solid #292;
+}
+#list {
+	position: absolute;
+	width: 2500px;
+	height: 300px;
+	left: 0px;
+	z-index: 1;
+}
+#list img {	
+	float: left;
+	width: 500px;
+	overflow: hidden;
+}
+#buttons {
+	position: absolute;
+	height: 10px;
+	width: 100px;
+	z-index: 2;
+	bottom: 20px;
+	left: 50%;
+	margin-left: -50px;
+}
+#buttons span {
+	cursor: pointer;
+	float: left;
+	border: 1px solid #fff;
+	width: 10px;
+	height: 10px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+ #buttons span:last-child {
+	margin-right: 0;
+}
+#buttons .on {
+	background: #291;
+}
+.arrow {
+	cursor: pointer;
+	display: none;
+	line-height: 39px;
+	text-align: center;
+	font-size: 36px;
+	font-weight: bold;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	z-index: 2;
+	top: 130px;
+	background: rgba(0,0,0,0.2);
+	color: #fff;
+}
+.arrow:hover {
+	background-color: rgba(0,0,0,0.7);
+}
+#container:hover .arrow {
+	display: block;
+}
+#prev {
+	left: 0px;
+}
+#next {
+	right: 0px;
+}
+.operation {
+	width: 50%;
+	margin: 4% auto;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div id="container">
+		<div id="list">
+			<img src="img/1.jpg" alt="张馨予">
+			<img src="img/2.jpg" alt="范冰冰">
+			<img src="img/3.jpg" alt="刘亦菲">
+			<img src="img/4.jpg" alt="王丽坤">
+			<img src="img/5.jpg" alt="气质美女">		
+		</div>		<!--end of #list-->
+		<div id="buttons">
+			<span index="1" class="on"></span>
+			<span index="2"></span>
+			<span index="3"></span>
+			<span index="4"></span>
+			<span index="5"></span>
+		</div>      <!--end of #buttons-->
+		<a href="javascript:;" class="arrow" id="prev">&lt;</a>
+		<a href="javascript:;" class="arrow" id="next">&gt;</a>
+	</div>    		<!--end of #container-->
+	<div class="operation">
+        <label for="direction">顺序</label>
+        <select name="" id="direction">
+            <option value="1">正序</option>    
+            <option value="0">逆序</option>
+        </select>
+        <label for="isLoop">循环</label>
+        <select name="" id="isLoop">
+            <option value="1">是</option>    
+            <option value="0">否</option>
+        </select>
+        <label for="duration">间隔</label>
+        <input type="text" id="duration" >毫秒
+        <input type="button" value="确定" id="sure">
+    </div>
+<script src="js/task0002_3.js"></script>
+</body>
+</html>
