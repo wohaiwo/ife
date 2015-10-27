@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>输入提示框</title>
+	<style>
+		body {
+		margin: 0;
+		padding: 0;
+		font: 14px/1.4 "Microsoft YaHei" , Arif;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+		/* 搜索框基本样式 */
+		.sidebar-search {
+			position: relative;
+			width: 260px;
+			margin: 50px auto;
+			border: 1px solid #e6e8e9;
+			box-shadow: 0 1px 2px #fff;
+		}
+		.sidebar-search:hover {
+			border-color: #2ea7e0;
+		}
+		.search-input {
+			width: 200px;
+			border: 0;
+			font-size: 14px;
+			padding: 10px;
+			float: left;
+		}
+		.search-btn {
+			background: url("img/searchBtn.png");
+			text-indent: -50px;
+			display: inline-block;
+			width: 38px;
+			height: 38px;
+			overflow: hidden;
+			float: right;
+		}
+		.search-btn:hover {
+			background-position: 0 -38px;
+		}
+		.sidebar-search > div:after {
+			content: "";
+			display: block;
+			height: 0;
+			clear: both;
+		}
+		/* 隐藏提示框 */
+		.search-result {
+			width: 100%;
+			display: none;
+			position: absolute;
+			top: 55px;
+			font-size: 14px;
+			background-color: #fff;
+			box-shadow: 0 1px 2px #d5d7d8;
+			list-style-type: none;
+			box-sizing: border-box;
+		}
+		/* 除了最后一个li 都设置一个2px的下外边距 */
+		.search-result li:not(:last-child) {
+			margin-bottom: 2px;
+
+		}
+		.search-result a {
+			display: inline-block;
+			width: 100%;
+			line-height: 30px;
+			padding-left: 10px;
+			color: #5e5e5e;
+			text-decoration: none;
+			box-sizing: border-box;
+		}
+		.search-result a:hover {
+			background: #eee;
+		}
+	</style>
+</head>
+<body>
+	<div class="sidebar-search">
+		<div>
+			<input class="search-input" placeholder="输入城市">
+			<a href="javascript:;" class="search-btn">搜索</a>
+		</div>
+		<ul id="result" class="search-result">
+		 	<li><a href="#" class="list" data-index="北京市beijingshi">北京市</a></li>
+            <li><a href="#" class="list" data-index="上海市shanghaishi">上海市</a></li>
+            <li><a href="#" class="list" data-index="杭州市hangzhoushi">杭州市</a></li>
+            <li><a href="#" class="list" data-index="广州市guangzhoushi">广州市</a></li>
+            <li><a href="#" class="list" data-index="深圳市shenzhenshi">深圳市</a></li>
+            <li><a href="#" class="list" data-index="南昌市nanchangshi">南昌市</a></li>
+            <li><a href="#" class="list" data-index="上饶市shangraoshi">上饶市</a></li>	
+		</ul>
+	</div>
+
+	<script>
+		(function() {
+			var searchInput = document.getElementsByClassName("search-input")[0],
+				result = document.getElementById("result"),
+				list = document.getElementsByClassName("list"),
+				eleStyle = document.createElement("style");				//添加list样式到style中去
+			document.querySelector("head").appendChild(eleStyle);
+
+			searchInput.onfocus = function() {
+				if(this.value != "") {
+					result.style.display = "block";
+				}
+			};
+			searchInput.onblur = function() {
+				if(this.value == "") {
+					result.style.display = "none";
+				}
+			};
+			
+			// 点击li时 将当前点击的值输入到input框中
+			for(var i = 0, len = list.length; i < len; i++) {
+				list[i].onclick = function() {
+					searchInput.value = this.firstChild.nodeValue;
+				}
+			}
+
+			searchInput.addEventListener("input", function() {
+				var value = this.value.trim();
+				if(value != "" && value.toLowerCase()) {
+					result.style.display = "block";
+					eleStyle.innerHTML = ".list:not([data-index *= "+ value + "]) { display : none;}";
+				} else {
+					result.style.display = "none";
+					eleStyle.innerHTML = "";
+				}
+			}, false);
+		}());
+	</script>
+</body>
+</html>
